@@ -72,8 +72,12 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - if: steps.plan.outputs.build == 'true'
-        uses: android-actions/setup-android@v3
+      - name: Accept the Android SDK licences (the runner image already ships the SDK; Gradle fetches platform 35 / build-tools on demand)
+        if: steps.plan.outputs.build == 'true'
+        run: |
+          root="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          sdkmanager=$(ls -d "$root"/cmdline-tools/*/bin/sdkmanager | head -n 1)
+          yes | "$sdkmanager" --sdk_root="$root" --licenses > /dev/null || true
 
       - if: steps.plan.outputs.build == 'true'
         uses: gradle/actions/setup-gradle@v4
