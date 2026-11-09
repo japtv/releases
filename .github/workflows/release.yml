@@ -4,7 +4,7 @@ name: release
 
 on:
   schedule:
-    - cron: '*/30 * * * *'    # polls the source; does nothing when it has not changed
+    - cron: '23 */6 * * *'    # safety-net poll every 6 h (the notify-releases dispatch is the normal trigger); does nothing when the source has not changed
   workflow_dispatch:
     inputs:
       force:

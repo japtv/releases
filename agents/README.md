@@ -3,7 +3,7 @@
 Owner rules, repo map, decisions and roadmap are in the site repo's `agents/` (`bitmark/agents/README.md`). This repo is **only CI**; never put source code, keystores or commit messages of the private repo here (logs and releases are public).
 
 ## What it does
-`.github/workflows/release.yml` (triggers: 30-minute schedule, manual *Run workflow* with `force`, `repository_dispatch: source-updated`): clones the private `bitmark-android` with a read-only token, plans (is the source commit already released? next version), builds `:app:exportRelease :desktop:exportDesktop` with the signing key, and publishes release `v<x.y.z>` with fixed asset names: `bitmark.apk`, `bitmark-desktop.tar.gz`, `bitmark-desktop.zip`, `release.json`, `SHA256SUMS`.
+`.github/workflows/release.yml` (triggers: 6-hour schedule, manual *Run workflow* with `force`, `repository_dispatch: source-updated`): clones the private `bitmark-android` with a read-only token, plans (is the source commit already released? next version), builds `:app:exportRelease :desktop:exportDesktop` with the signing key, and publishes release `v<x.y.z>` with fixed asset names: `bitmark.apk`, `bitmark-desktop.tar.gz`, `bitmark-desktop.zip`, `release.json`, `SHA256SUMS`.
 
 ## Configuration (Settings -> Secrets and variables -> Actions)
 - Secrets: `SOURCE_TOKEN` (read-only on the source), `BITMARK_KEYSTORE_B64`, `BITMARK_KEYSTORE_PASSWORD`, `BITMARK_KEY_ALIAS`, `BITMARK_KEY_PASSWORD`.
